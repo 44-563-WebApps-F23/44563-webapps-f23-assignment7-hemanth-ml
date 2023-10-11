@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Merger Page</title>
+	<style>
+		body {
+			background-color: rgb(7, 213, 62);
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			text-align: center;
+		}
+
+		h1 {
+			text-align: center;
+			margin-top: 30px;
+			font-weight: bold;
+			color: rgb(227, 235, 14);
+			text-shadow: 1px 1px 1px black;
+		}
+
+		.flex-container {
+			display: flex;
+			flex-direction: row;
+			background-color: rgb(128, 162, 240);
+		}
+
+		.flex-container>div {
+			/*div children of the flex container*/
+			background-color: rgb(240, 8, 8);
+			margin: 10px;
+			padding: 20px;
+			font-size: 30px;
+		}
+
+		/* Responsive layout */
+		@media (max-width: 600px) {
+			.flex-container {
+				flex-direction: column;
+				background-color: green;
+			}
+		}
+
+		.button {
+			background-color: #4CAF50;
+			border: none;
+			color: black;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			border-radius: 8px;
+		}
+
+		p {
+			font-weight: bold;
+			margin: 10px;
+			font-size: 16px;
+			padding: 5px;
+		}
+
+		input[type=text] {
+			border: 2px solid black;
+			border-radius: 4px;
+			padding: 8px;
+		}
+
+		.label {
+			font-weight: bold;
+			margin: 10px;
+			font-size: 16px;
+			padding: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> A merger builded by Yallanki Hemanth</h1>
+	<label class="label" for="inputElement">Input:</label>
+	<input type="text" class="form-control" name="inputElement" id="inputElement" value="">
+	<br>
+	<br>
+	<div class="flex-container" id="target">
+		<div class="merger">Row Item-1</div>
+		<div class="merger">Row Item-2</div>
+		<div class="merger">Row Item-3</div>
+	</div>
+	<br>
+	<button type="button" class="button" onclick="makeNewDiv()"><b>Add end</b></button>
+	<button type="button" class="button" onclick="addFront()"><b>Add front</b></button>
+	<button type="button" class="button" onclick="remove()"><b>Remove</b></button>
+	<button type="button" class="button" onclick="swap()"><b>Swap</b></button>
+</body>
+<script>
+	function makeNewDiv() {
+		let element = document.createElement("div");
+		let value = document.getElementById("inputElement").value;
+		element.style.color = "black";
+		element.innerHTML = value;
+		element.className = "merger";
+		let container = document.getElementById('target');
+		container.appendChild(element);
+	}
+	function addFront() {
+		let element = document.createElement("div");
+		let value = document.getElementById("inputElement").value;
+		element.style.color = "black";
+		element.innerHTML = value;
+		element.className = "merger";
+		let container = document.getElementById("target");
+		container.insertBefore(element, container.firstChild);
+	}
+	function remove() {
+		let mergerItems = document.getElementsByClassName("merger");
+		if (mergerItems.length > 0) {
+			let length = mergerItems.length;
+			let index = Math.floor(length / 2);
+			if (index >= 0 && index < length) {
+				mergerItems[index].remove();
+			}
+		}
+	}
+	function swap() {
+		let mergerItems = document.getElementsByClassName("merger");
+		let container = document.getElementById("target");
+		let element1 = Math.floor(Math.random() * mergerItems.length);
+		let element2 = Math.floor(Math.random() * mergerItems.length);
+		let firstInnerText = document.getElementsByClassName("merger")[element1];
+		let secondInnerText = document.getElementsByClassName("merger")[element2];
+		if (mergerItems.length > 1) {
+			let temp = firstInnerText.innerHTML;
+			firstInnerText.innerHTML = secondInnerText.innerHTML;
+			secondInnerText.innerHTML = temp;
+		}
+	}
+</script>
+
+</html>
